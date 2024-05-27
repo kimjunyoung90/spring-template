@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0">
+
+    <servlet>
+        <servlet-name>dispatcher</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+         <init-param>
+             <param-name>contextConfigLocation</param-name>
+             <param-value>
+                 /WEB-INF/file_uploader.xml
+             </param-value>
+         </init-param>
+        <load-on-startup>1</load-on-startup>
+        <multipart-config>
+            <!-- 업로드한 파일이 임시로 저장될 위치 지정 -->
+            <location>/Users/junyoungkim/Documents</location>
+            <!-- 업로드 가능한 파일의 최대 크기를 바이트 단위로 지정. -1은 제한 없음. 기본값 -1 -->
+            <max-file-size>-1</max-file-size>
+            <!-- 업로드한 파일의 크기가 이 태그의 값보다 크면 location에서 지정한 디렉토리에 임시로 파일을 생성한다. 업로드 파일의 파일 크기가 이 태그의 값 이하면 메모리에 파일 데이터를 보관한다. 단위는 바이트. 기본값 0 -->
+            <max-request-size>-1</max-request-size>
+            <!-- 전체 Multipart 요청 데이터의 최대 제한 크기를 바이트 단위로 지정한다. -1은 제한이 없음을 의미. 기본값 -1 -->
+            <file-size-threshold>1024</file-size-threshold>
+        </multipart-config>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>dispatcher</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>dispatcher2</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>
+                /WEB-INF/file_uploader2.xml
+            </param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+        <multipart-config>
+            <max-file-size>-1</max-file-size>
+            <max-request-size>-1</max-request-size>
+            <file-size-threshold>1024</file-size-threshold>
+        </multipart-config>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>dispatcher2</servlet-name>
+        <url-pattern>*.do</url-pattern>
+    </servlet-mapping>
+</web-app>
