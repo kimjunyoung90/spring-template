@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans   
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+		<property name="driverClass" value="com.mysql.jdbc.Driver" />
+		<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/guestbook?characterEncoding=utf8" />
+		<property name="user" value="rlawnsdud05" />
+		<property name="password" value="Rlawnsdud1@" />
+	</bean>
+<!--	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">-->
+<!--		<property name="driverClassName" value="com.mysql.jdbc.Driver" />-->
+<!--		<property name="url" value="jdbc:mysql://localhost:3306/guestbook?characterEncoding=utf8" />-->
+<!--		<property name="username" value="rlawnsdud05" />-->
+<!--		<property name="password" value="Rlawnsdud1@" />-->
+<!--	</bean>-->
+
+	<bean id="jdbcMessageDao" class="jdbc.JdbcMessageDao">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="jdbcTemplateMessageDao"
+		class="jdbc.JdbcTemplateMessageDao">
+		<constructor-arg ref="dataSource" />
+	</bean>
+
+	<bean id="jdbcTemplateMessageDao2"
+		class="jdbc.JdbcTemplateMessageDao2">
+		<constructor-arg ref="dataSource" />
+	</bean>
+
+	<bean id="namedTemlateDao"
+		class="jdbc.NamedJdbcTemplateMessageDao">
+		<constructor-arg ref="dataSource" />
+	</bean>
+
+	<bean id="simpleInsertMessageDao"
+		class="jdbc.SimpleInsertMessageDao">
+		<constructor-arg ref="dataSource" />
+	</bean>
+</beans>
+
